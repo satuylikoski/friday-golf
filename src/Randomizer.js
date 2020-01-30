@@ -50,40 +50,39 @@ export default function Randomizer({ points, rules }) {
   return (
     <>
       <Wrapper mt={10}>
-        <PointBox>
+        <Box>
           <HoleName>big</HoleName>
           <Point>{spring.b.interpolate(b => b.toFixed(0))}</Point>
           <Description>
             From {points.b[0]} to {points.b[1]}
           </Description>
-        </PointBox>
+        </Box>
 
-        <PointBox>
+        <Box>
           <HoleName>small</HoleName>
           <Point>{spring.s.interpolate(s => s.toFixed(0))}</Point>
           <Description>
             From {points.s[0]} to {points.s[1]}
           </Description>
-        </PointBox>
+        </Box>
 
-        <PointBox>
+        <Box>
           <HoleName>miss</HoleName>
           <Point>{spring.miss.interpolate(miss => miss.toFixed(0))}</Point>
           <Description>
             From {points.miss[0]} to {points.miss[1]}
           </Description>
-        </PointBox>
-      </Wrapper>
+        </Box>
 
-      <ColorButton onClick={() => randomize()}>Randomize</ColorButton>
+        <ColorButton onClick={() => randomize()}>Randomize</ColorButton>
+      </Wrapper>
     </>
   );
 }
 
 const ColorButton = withStyles({
   root: {
-    position: "absolute",
-    bottom: "15%",
+    gridColumn: "2",
     color: "white",
     backgroundColor: "#0b0b0b",
     fontFamily: "Assistant",
@@ -110,10 +109,8 @@ const Point = styled(animated(Heading))`
 `;
 
 const HoleName = styled(Heading)`
-  /* text-transform: uppercase; */
   font-size: 24px;
   color: white;
-  /* font-family: "Assistant"; */
   letter-spacing: 3px;
   margin-bottom: 24px;
 
@@ -135,14 +132,14 @@ const Description = styled(Heading)`
 
 const Wrapper = styled(Box)`
   display: grid;
+  position: relative;
   grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto auto;
+  grid-row-gap: 10vh;
 
   width: 100%;
-`;
 
-const PointBox = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-items: center;
+  text-align: center;
 `;

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import store from "store";
-import { Provider } from "@freska/freska-ui";
-import styled from "styled-components";
+import { Provider, Box } from "@freska/freska-ui";
+import styled, { createGlobalStyle } from "styled-components";
 
 import "./App.css";
 import fridayGolf from "./friday-golf.png";
 import ScoreTable from "./ScoreTable";
 import Randomizer from "./Randomizer";
 import Adjuster from "./Adjuster";
+import GameChanger from "./GameChanger";
 
 function App() {
   const [points, setPoints] = useState({
@@ -33,39 +34,60 @@ function App() {
 
   // Next: Add some animations if max or min reached e.g.
   return (
-    <Provider>
-      <Wrapper>
-        <Img src={fridayGolf} alt="friday golf" />
+    <>
+      <SiteCSS />
+      <Provider>
+        <Box
+          position="fixed"
+          display="flex"
+          width="100%"
+          justifyContent="space-around"
+          alignItems="flex-start"
+          mt={3}
+        >
+          <GameChanger />
+          <Img src={fridayGolf} alt="friday golf" />
+          <Adjuster
+            initialPoints={points}
+            initialRules={rules}
+            onUpdate={(points, rules) => {
+              setPoints(points);
+              setRules(rules);
+              store.set("rules", rules);
+              store.set("points", points);
+            }}
+          />
+        </Box>
+
+        <Wrapper>
+          <Randomizer points={points} rules={rules} />
+        </Wrapper>
 
         {showScoreTable && <ScoreTable />}
-
-        <Randomizer points={points} rules={rules} />
-
-        <Adjuster
-          initialPoints={points}
-          initialRules={rules}
-          onUpdate={(points, rules) => {
-            setPoints(points);
-            setRules(rules);
-            store.set("rules", rules);
-            store.set("points", points);
-          }}
-        />
-      </Wrapper>
-    </Provider>
+      </Provider>
+    </>
   );
 }
 
 const Img = styled.img`
-  height: 180px;
+  height: 30px;
+
+  ${props => props.theme.mediaQueries.md} {
+    height: 140px;
+  }
 `;
 
 const Wrapper = styled.div`
-  background-color: #0b0b0b;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  /* justify-content: space-between; */
+`;
+
+const SiteCSS = createGlobalStyle`
+  html, body {
+    background-color: #0b0b0b;
+  }
 `;
 
 export default App;
