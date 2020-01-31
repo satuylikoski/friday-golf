@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import CallMissedIcon from "@material-ui/icons/CallMissed";
 import CallMissedOutgoingIcon from "@material-ui/icons/CallMissedOutgoing";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import LooksTwoIcon from "@material-ui/icons/LooksTwo";
+import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
+import ThumbsUpDownIcon from "@material-ui/icons/ThumbsUpDown";
 
 import Button from "./components/Button";
 import Modal from "./components/Modal";
@@ -13,47 +17,71 @@ import Modal from "./components/Modal";
 export default function GameChanger() {
   const [isOpen, setIsOpen] = useState(false);
   const [changer, setChanger] = useState(null);
+  const classes = useStyles();
 
   const changers = [
+    "borrow",
     "givePrevious",
     "giveNext",
     "giveSomeone",
+    "hitTwice",
+    "leftIsRight",
     "lightsOff",
     "loosePoints",
-    "doublePoints"
+    "doublePoints",
+    "threeBalls"
   ];
 
   const iconMapping = {
-    giveEarlier: <CallMissedIcon fontSize="large" />,
-    giveNext: <CallMissedOutgoingIcon fontSize="large" />,
-    giveSomeone: <CardGiftcardIcon fontSize="large" />,
-    lightsOff: <Brightness3Icon fontSize="large" />,
-    loosePoints: <DeleteForeverIcon fontSize="large" />,
-    doublePoints: <LooksTwoIcon fontSize="large" />
+    borrow: <ThumbsUpDownIcon className={classes.icon} />,
+    givePrevious: <CallMissedIcon className={classes.icon} />,
+    giveNext: <CallMissedOutgoingIcon className={classes.icon} />,
+    giveSomeone: <CardGiftcardIcon className={classes.icon} />,
+    hitTwice: <LooksTwoIcon className={classes.icon} />,
+    leftIsRight: <CompareArrowsIcon className={classes.icon} />,
+    lightsOff: <Brightness3Icon className={classes.icon} />,
+    loosePoints: <DeleteForeverIcon className={classes.icon} />,
+    doublePoints: <LooksTwoIcon className={classes.icon} />,
+    threeBalls: <ScatterPlotIcon className={classes.icon} />
   };
 
   const headers = {
-    givePrevious: "Give previous",
-    giveNext: "Give next",
-    giveSomeone: "Give someone",
+    borrow: "Borrow",
+    givePrevious: "Previous",
+    giveNext: "Next",
+    giveSomeone: "Gift",
+    hitTwice: "Twice",
+    leftIsRight: "Left is right",
     lightsOff: "Lights off",
     loosePoints: "Loose",
-    doublePoints: "Double"
+    doublePoints: "Double",
+    threeBalls: "Three balls"
   };
 
   const rules = {
+    borrow:
+      "Decide points whose points you want. As a turn, (s)he will get your points! (Nb: If someone is selected multiple times, he will get more points)",
     givePrevious: "Previous player will get your points!",
     giveNext: "Next player will get your points!",
-    giveSomeone:
-      "Before shooting, select a player who will receive your points",
+    giveSomeone: "Before shooting, select a player who will get your points!",
+    hitTwice: "Hit the ball twice instead of once!",
+    leftIsRight: "You are only allowed to use your wrong hand!",
     lightsOff: "Turn the lights off during this round!",
-    loosePoints: "You will loose the points you get from your current points",
-    doublePoints: "Congrats! You will get your points x2!"
+    loosePoints:
+      "The amount of points you get will be reduced from your current points!",
+    doublePoints: "Congrats! You will get your points x2!",
+    threeBalls: "Hit three balls at once!"
   };
 
   const handleChanger = () => {
     setIsOpen(true);
-    setChanger(changers[Math.floor(changers.length * Math.random())]);
+
+    let newValue;
+    do {
+      newValue = changers[Math.floor(changers.length * Math.random())];
+    } while (newValue === changer);
+
+    setChanger(newValue);
   };
 
   return (
@@ -77,3 +105,9 @@ export default function GameChanger() {
     </>
   );
 }
+
+const useStyles = makeStyles({
+  icon: {
+    fontSize: "4rem"
+  }
+});

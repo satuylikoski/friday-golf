@@ -32,7 +32,7 @@ const AnimatedBox = styled(animated(Box))`
   position: relative;
   background-color: white;
   border-radius: 5px;
-  min-width: 500px;
+  width: 500px;
 `;
 
 const useStyles = makeStyles({

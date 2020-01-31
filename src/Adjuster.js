@@ -6,7 +6,6 @@ import MaterialUISlider from "@material-ui/core/Slider";
 import IconButton from "@material-ui/core/IconButton";
 import MaterialUICheckbox from "@material-ui/core/Checkbox";
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
-import CloseIcon from "@material-ui/icons/Close";
 import ReplayIcon from "@material-ui/icons/Replay";
 import CheckIcon from "@material-ui/icons/Check";
 
