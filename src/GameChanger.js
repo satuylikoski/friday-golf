@@ -7,6 +7,7 @@ import CallMissedOutgoingIcon from "@material-ui/icons/CallMissedOutgoing";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import Filter2Icon from "@material-ui/icons/Filter2";
 import FormatQuoteIcon from "@material-ui/icons/FormatQuote";
 import HeightIcon from "@material-ui/icons/Height";
@@ -24,6 +25,7 @@ export default function GameChanger() {
   const classes = useStyles();
 
   const changers = [
+    "fish",
     "flip",
     "givePrevious",
     "giveNext",
@@ -41,6 +43,7 @@ export default function GameChanger() {
   ];
 
   const iconMapping = {
+    fish: <FavoriteIcon className={classes.icon} />,
     flip: <HeightIcon className={classes.icon} />,
     givePrevious: <CallMissedIcon className={classes.icon} />,
     giveNext: <CallMissedOutgoingIcon className={classes.icon} />,
@@ -58,6 +61,7 @@ export default function GameChanger() {
   };
 
   const headers = {
+    fish: "Go fish",
     flip: "Flip it",
     givePrevious: "Previous",
     giveNext: "Next",
@@ -78,6 +82,8 @@ export default function GameChanger() {
   // borrow
 
   const rules = {
+    fish:
+      "You play your round as normal, but someone else hold the fish pillow uncomfortably close to your face.  They may not obscure your vision fully, as the nose of the fish must be pointing at the nose of the player  If you are afraid of fish, this can be a plant instead (or another object of your choosing)",
     flip:
       "You must use the handle of the golf club to hit the ball, and hold the 'club' end.",
     givePrevious:
