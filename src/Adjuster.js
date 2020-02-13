@@ -181,7 +181,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
 
 const Slider = withStyles({
   root: {
-    color: "#fbbe39",
+    color: "#fcd13f",
     height: 8
   },
   thumb: {

@@ -8,13 +8,14 @@ const Button = withStyles({
     fontFamily: "Assistant",
     textTransform: "lowercase",
     border: "2px solid #0b0b0b",
+    boxShadow: "none",
     fontSize: "24px",
     fontWeight: "600",
-    width: "200px",
+    width: "250px",
     "&:hover": {
       backgroundColor: "#0b0b0b",
       color: "white",
-      borderColor: "#FBCE39"
+      borderColor: "#fcd13f"
     }
   }
 })(MaterialUIButton);

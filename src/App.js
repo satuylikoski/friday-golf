@@ -3,6 +3,9 @@ import store from "store";
 import { Provider, Box } from "@freska/freska-ui";
 import styled, { createGlobalStyle } from "styled-components";
 
+import Button from "./components/Button";
+import * as data from "./data";
+
 import "./App.css";
 import fridayGolf from "./friday-golf.png";
 import ScoreTable from "./ScoreTable";
@@ -10,7 +13,29 @@ import Randomizer from "./Randomizer";
 import Adjuster from "./Adjuster";
 import GameChanger from "./GameChanger";
 
+const random = () => {
+  let newValue;
+  let usedValues = store.get("changers") || [];
+
+  if (Object.keys(data.changers).length === usedValues.length) {
+    usedValues = [];
+  }
+
+  do {
+    newValue = Math.floor(
+      Math.random() * (Object.keys(data.changers).length - 1 + 1) + 0
+    );
+  } while (usedValues.includes(newValue));
+
+  usedValues.push(newValue);
+  store.set("changers", usedValues);
+
+  return newValue;
+};
+
 function App() {
+  const [isGameChangerOn, setIsGameChangerOn] = useState(false);
+  const [gameChangerIndex, setGameChangerIndex] = useState(undefined);
   const [points, setPoints] = useState({
     b: [-10, 25],
     s: [-10, 25],
@@ -45,7 +70,16 @@ function App() {
           alignItems="flex-start"
           mt={3}
         >
-          <GameChanger />
+          <Button
+            onClick={() => {
+              if (!isGameChangerOn) {
+                setIsGameChangerOn(true);
+              }
+              setGameChangerIndex(random());
+            }}
+          >
+            Game changer
+          </Button>
           <Img src={fridayGolf} alt="friday golf" />
           <Adjuster
             initialPoints={points}
@@ -60,7 +94,16 @@ function App() {
         </Box>
 
         <Wrapper>
-          <Randomizer points={points} rules={rules} />
+          <GameChanger
+            isOn={isGameChangerOn}
+            index={gameChangerIndex}
+            onClose={() => setIsGameChangerOn(false)}
+          />
+          <Randomizer
+            points={points}
+            rules={rules}
+            isGameChangerOn={isGameChangerOn}
+          />
         </Wrapper>
 
         {showScoreTable && <ScoreTable />}
@@ -81,6 +124,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
   display: flex;
   align-items: center;
+
   /* justify-content: space-between; */
 `;
 

@@ -108,14 +108,14 @@ const Point = styled(animated(Heading))`
   }
 `;
 
-const HoleName = styled(Heading)`
+const HoleName = styled.h1`
   font-size: 24px;
   color: white;
   letter-spacing: 3px;
   margin-bottom: 24px;
 
   ${props => props.theme.mediaQueries.md} {
-    font-size: 40px;
+    font-size: 36px;
   }
 `;
 

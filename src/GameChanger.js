@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { animated, useSpring } from "react-spring";
+import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import CallMissedIcon from "@material-ui/icons/CallMissed";
 import CallMissedOutgoingIcon from "@material-ui/icons/CallMissedOutgoing";
@@ -16,137 +20,88 @@ import LooksTwoIcon from "@material-ui/icons/LooksTwo";
 import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
 import TimerIcon from "@material-ui/icons/Timer";
 
-import Button from "./components/Button";
-import Modal from "./components/Modal";
+import * as data from "./data";
 
-export default function GameChanger() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [changer, setChanger] = useState(null);
+export default function GameChanger({ isOn, index, onClose }) {
   const classes = useStyles();
 
-  const changers = [
-    "fish",
-    "flip",
-    "givePrevious",
-    "giveNext",
-    "giveSomeone",
-    "hitTwice",
-    "inverse",
-    "leftIsRight",
-    "lightsOff",
-    "loosePoints",
-    "nameHole",
-    "doubleHit",
-    "doublePoints",
-    "threeBalls",
-    "timer"
-  ];
+  const props = useSpring({
+    width: isOn ? "400px" : "0px",
+    visibility: isOn ? "visible" : "hidden",
+    transform: isOn ? "translateX(0)" : "translateX(-100%)"
+  });
 
   const iconMapping = {
-    fish: <FavoriteIcon className={classes.icon} />,
-    flip: <HeightIcon className={classes.icon} />,
-    givePrevious: <CallMissedIcon className={classes.icon} />,
-    giveNext: <CallMissedOutgoingIcon className={classes.icon} />,
-    giveSomeone: <CardGiftcardIcon className={classes.icon} />,
-    hitTwice: <LooksTwoIcon className={classes.icon} />,
-    inverse: <LoopIcon className={classes.icon} />,
-    leftIsRight: <CompareArrowsIcon className={classes.icon} />,
-    lightsOff: <Brightness3Icon className={classes.icon} />,
-    loosePoints: <DeleteForeverIcon className={classes.icon} />,
-    nameHole: <FormatQuoteIcon className={classes.icon} />,
-    doubleHit: <Filter2Icon className={classes.icon} />,
-    doublePoints: <LooksTwoIcon className={classes.icon} />,
-    threeBalls: <ScatterPlotIcon className={classes.icon} />,
-    timer: <TimerIcon className={classes.icon} />
-  };
-
-  const headers = {
-    fish: "Go fish",
-    flip: "Flip it",
-    givePrevious: "Previous",
-    giveNext: "Next",
-    giveSomeone: "Gift",
-    hitTwice: "Double Tap",
-    inverse: "Inverse",
-    leftIsRight: "Left is right",
-    lightsOff: "Lights Out",
-    loosePoints: "Lose",
-    nameHole: "Name your shot",
-    doubleHIt: "Double hit, single score",
-    doublePoints: "Double trouble",
-    threeBalls: "Three balls",
-    timer: "Timer"
-  };
-
-  // Need to be fixed:
-  // borrow
-
-  const rules = {
-    fish:
-      "You play your round as normal, but someone else hold the fish pillow uncomfortably close to your face.  They may not obscure your vision fully, as the nose of the fish must be pointing at the nose of the player  If you are afraid of fish, this can be a plant instead (or another object of your choosing)",
-    flip:
-      "You must use the handle of the golf club to hit the ball, and hold the 'club' end.",
-    givePrevious:
-      "The player before you gets your points. The first player of the round gives his/her points for the last.",
-    giveNext:
-      "The player after you gets your points. Last player of the round gives his/her points for the first.",
-    giveSomeone:
-      "You take your shot and then decide who you give your points to.  One person can receive multiple people's points.  If no one chooses you to receive points, you get 0.  You cannot choose yourself.",
-    hitTwice:
-      "You must hit the ball twice to get it into the hole.  Your first hit must not score the point, and should move the ball.  On your second hit, you may try and score a point.",
-    inverse:
-      "You take your shot and then decide who to inverse your points with.  For example, if you get 5 points, they get -5, and if you get -10, they get 10.  One person can receive multiple people's points.  If no one chooses you to receive points, you get 0.  You cannot choose yourself.",
-    leftIsRight:
-      "If you are usually right handed, you hold the club left-handed, and vice versa.",
-    lightsOff: "We play the round with the lights off",
-    loosePoints:
-      "The aim of this is that everyone looses points on the round.  You take your shot and then decide who should loose the number of points you get.  For example, if you score 10 points, whoever you choose looses 10 points (and you don't get any).  If you score -10, the other person still looses 10 points.  One person can loose points from multiple people's.  If no one chooses you to receive points, you get 0.  You cannot choose yourself.",
-    nameHole:
-      "You name which hole you are aiming for.  If you get it, double points.  If you get another hole, it's 0-points.  If you miss, it's the same as a miss.",
-    doubleHit: "You take 2 shots and get the highest value",
-    doublePoints:
-      "Congrats! Whatever points you get are doubled.  Remember, if you get a negative number, this will mean you lose even more points.  For example, if you score 5 points, this will be doubled to 10.  If you score -5, this will be doubled to -10.  If you get 0, that's still 0.",
-    threeBalls:
-      "There are three balls on the green at once.  You get one hit to hit all three balls at once, and you will get points from all of them. For example if one is a miss and two goes to the small hole - you will get small hole points x2 and miss points x1.",
-    timer:
-      "You stand 3 feet away from the golf course.  You have 5 seconds to walk over and take your shot.  If you do not hit the ball before the time is up, it is counted as a miss.  If you hit the ball before the time are up, then all is normal."
-  };
-
-  const handleChanger = () => {
-    setIsOpen(true);
-
-    let newValue;
-    do {
-      newValue = changers[Math.floor(changers.length * Math.random())];
-    } while (newValue === changer);
-
-    setChanger(newValue);
+    0: <FavoriteIcon className={classes.icon} />,
+    1: <HeightIcon className={classes.icon} />,
+    2: <CallMissedIcon className={classes.icon} />,
+    3: <CallMissedOutgoingIcon className={classes.icon} />,
+    4: <CardGiftcardIcon className={classes.icon} />,
+    5: <LooksTwoIcon className={classes.icon} />,
+    6: <LoopIcon className={classes.icon} />,
+    7: <CompareArrowsIcon className={classes.icon} />,
+    8: <Brightness3Icon className={classes.icon} />,
+    9: <DeleteForeverIcon className={classes.icon} />,
+    10: <FormatQuoteIcon className={classes.icon} />,
+    11: <Filter2Icon className={classes.icon} />,
+    12: <LooksTwoIcon className={classes.icon} />,
+    13: <ScatterPlotIcon className={classes.icon} />,
+    14: <TimerIcon className={classes.icon} />
   };
 
   return (
-    <>
-      <Button variant="contained" onClick={() => handleChanger()}>
-        Game changer
-      </Button>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <h4>Game changer</h4>
-
-        <Box textAlign="center" my={3}>
-          {iconMapping[changer]}
-
-          <Box mt={2} mb={6}>
-            <h1>{headers[changer]}</h1>
-          </Box>
-
-          <h5>{rules[changer]}</h5>
+    <AnimatedBox style={props} color="white">
+      <Box width="300px">
+        <Box position="absolute" top="20px" left="20px">
+          <h4 style={{ color: "white" }}>Game changer</h4>
         </Box>
-      </Modal>
-    </>
+
+        <Box position="absolute" top="6px" right="6px">
+          <IconButton onClick={() => onClose()}>
+            <CloseIcon fontSize="small" style={{ color: "#ffffff" }} />
+          </IconButton>
+        </Box>
+
+        <Box textAlign="center" mt={6} width="250px">
+          {iconMapping[index]}
+
+          <RulesHeader>{data.changers[index]}</RulesHeader>
+
+          <RulesText>{data.rules[index]}</RulesText>
+        </Box>
+      </Box>
+    </AnimatedBox>
   );
 }
 
+const AnimatedBox = styled(animated(Box))`
+  height: 65vh;
+
+  background-color: #202020;
+  padding: 16px;
+  border-radius: 0 4px 4px 0;
+  overflow-x: hidden;
+`;
+
+const RulesText = styled.h5`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+
+  overflow-y: scroll;
+`;
+
+const RulesHeader = styled.h2`
+  text-transform: lowercase;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  letter-spacing: 2px;
+`;
+
 const useStyles = makeStyles({
   icon: {
-    fontSize: "4rem"
+    fontSize: "4rem",
+    color: "#fcd13f"
   }
 });
