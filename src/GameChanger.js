@@ -14,11 +14,15 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Filter2Icon from "@material-ui/icons/Filter2";
 import FormatQuoteIcon from "@material-ui/icons/FormatQuote";
+import GolfCourseIcon from "@material-ui/icons/GolfCourse";
+import GroupIcon from "@material-ui/icons/Group";
 import HeightIcon from "@material-ui/icons/Height";
 import LoopIcon from "@material-ui/icons/Loop";
 import LooksTwoIcon from "@material-ui/icons/LooksTwo";
+import RedditIcon from "@material-ui/icons/Reddit";
 import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
 import TimerIcon from "@material-ui/icons/Timer";
+import WrapTextIcon from "@material-ui/icons/WrapText";
 
 import * as data from "./data";
 
@@ -46,7 +50,11 @@ export default function GameChanger({ isOn, index, onClose }) {
     11: <Filter2Icon className={classes.icon} />,
     12: <LooksTwoIcon className={classes.icon} />,
     13: <ScatterPlotIcon className={classes.icon} />,
-    14: <TimerIcon className={classes.icon} />
+    14: <TimerIcon className={classes.icon} />,
+    15: <GolfCourseIcon className={classes.icon} />,
+    16: <GroupIcon className={classes.icon} />,
+    17: <WrapTextIcon className={classes.icon} />,
+    18: <RedditIcon className={classes.icon} />
   };
 
   return (
