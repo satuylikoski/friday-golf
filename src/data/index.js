@@ -20,7 +20,9 @@ export const changers = {
   18: "God",
   19: "Jere's Special",
   20: "Someone else",
-  21: "VR"
+  21: "VR",
+  22: "Football",
+  23: "Cup in the middle"
 };
 
 export const rules = {
@@ -45,5 +47,7 @@ export const rules = {
   18: "For that round, one person is nominated to be God (or whichever higher being/deity you prefer, including but not limited to, the laws of physics, the rules of probability, traffi regulations etc., you choose!).  They can be nominated by choosing a random number, group vote, free-style rap contest, or other method.  Any disputes about anything (golf related or otherwise) or confusion is decided by this person - their word is final for the round.  The round ends once the 'randomize' button has been pressed for the final shot of the round.",
   19: "",
   20: "You nominate someone else to take your shot for you on your turn.  You get whatever points they score.  If someone isn't moniated, they get zero points.  One person can be nominated by multiple players.",
-  21: "You take your shot while watching a VR video"
+  21: "You take your shot while watching a VR video",
+  22: "Instead of using the golf club, you use your foot to get the ball in the hole. The ball must still start between the unicorn's legs.",
+  23: "A cup or roll of tap is places between the 2 holes, to make it easier for the ball to go in"
 };

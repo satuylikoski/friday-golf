@@ -12,6 +12,7 @@ import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
 import Filter2Icon from "@material-ui/icons/Filter2";
 import FormatQuoteIcon from "@material-ui/icons/FormatQuote";
 import GolfCourseIcon from "@material-ui/icons/GolfCourse";
@@ -24,6 +25,7 @@ import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import RedditIcon from "@material-ui/icons/Reddit";
 import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
+import SportsSoccerIcon from "@material-ui/icons/SportsSoccer";
 import TimerIcon from "@material-ui/icons/Timer";
 import WrapTextIcon from "@material-ui/icons/WrapText";
 
@@ -60,7 +62,9 @@ export default function GameChanger({ isOn, index, onClose }) {
     18: <RedditIcon className={classes.icon} />,
     19: <GpsFixedIcon className={classes.icon} />,
     20: <PersonPinCircleIcon className={classes.icon} />,
-    21: <OndemandVideoIcon className={classes.icon} />
+    21: <OndemandVideoIcon className={classes.icon} />,
+    22: <SportsSoccerIcon className={classes.icon} />,
+    23: <FreeBreakfastIcon className={classes.icon} />
   };
 
   return (
