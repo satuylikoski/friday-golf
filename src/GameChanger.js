@@ -20,6 +20,8 @@ import GroupIcon from "@material-ui/icons/Group";
 import HeightIcon from "@material-ui/icons/Height";
 import LoopIcon from "@material-ui/icons/Loop";
 import LooksTwoIcon from "@material-ui/icons/LooksTwo";
+import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
+import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import RedditIcon from "@material-ui/icons/Reddit";
 import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
 import TimerIcon from "@material-ui/icons/Timer";
@@ -56,7 +58,9 @@ export default function GameChanger({ isOn, index, onClose }) {
     16: <GroupIcon className={classes.icon} />,
     17: <WrapTextIcon className={classes.icon} />,
     18: <RedditIcon className={classes.icon} />,
-    19: <GpsFixedIcon className={classes.icon} />
+    19: <GpsFixedIcon className={classes.icon} />,
+    20: <PersonPinCircleIcon className={classes.icon} />,
+    21: <OndemandVideoIcon className={classes.icon} />
   };
 
   return (
