@@ -15,6 +15,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import Filter2Icon from "@material-ui/icons/Filter2";
 import FormatQuoteIcon from "@material-ui/icons/FormatQuote";
 import GolfCourseIcon from "@material-ui/icons/GolfCourse";
+import GpsFixedIcon from "@material-ui/icons/GpsFixed";
 import GroupIcon from "@material-ui/icons/Group";
 import HeightIcon from "@material-ui/icons/Height";
 import LoopIcon from "@material-ui/icons/Loop";
@@ -54,7 +55,8 @@ export default function GameChanger({ isOn, index, onClose }) {
     15: <GolfCourseIcon className={classes.icon} />,
     16: <GroupIcon className={classes.icon} />,
     17: <WrapTextIcon className={classes.icon} />,
-    18: <RedditIcon className={classes.icon} />
+    18: <RedditIcon className={classes.icon} />,
+    19: <GpsFixedIcon className={classes.icon} />
   };
 
   return (

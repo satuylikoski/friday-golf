@@ -17,7 +17,8 @@ export const changers = {
   15: "Mini-golf",
   16: "Golf buddy",
   17: "Snooker",
-  18: "God"
+  18: "God",
+  19: "Jere's Special"
 };
 
 export const rules = {
@@ -39,5 +40,5 @@ export const rules = {
   15: "Instead of the regular club and ball, you use the mini club and ball, with the same holes.",
   16: "Choose a golf buddy - you both get the same score.  Both people take their shot and the mean average is the score.  For example, if person 1 gets 10, and person 2 gets 2, then both get 6.  If you do not have a partner, you must join a pair and the mean average is taken of those 3 scores.",
   17: "You use the golf club like a snooker cue to get the ball in the hole.",
-  18: "For that round, one person is nominated to be God (or whichever higher being/deity you prefer, including but not limited to, the laws of physics, the rules of probability, traffi regulations etc., you choose!).  They can be nominated by choosing a random number, group vote, free-style rap contest, or other method.  Any disputes about anything (golf related or otherwise) or confusion is decided by this person - their word is final for the round.  The round ends once the 'randomize' button has been pressed for the final shot of the round."
+  19: ""
 };
