@@ -6,7 +6,6 @@ import styled, { createGlobalStyle } from "styled-components";
 import Button from "./components/Button";
 import * as data from "./data";
 
-import "./App.css";
 import fridayGolf from "./friday-golf.png";
 import ScoreTable from "./ScoreTable";
 import Randomizer from "./Randomizer";
@@ -60,7 +59,7 @@ function App() {
   // Next: Add some animations if max or min reached e.g.
   return (
     <>
-      <SiteCSS />
+      <Global />
       <Provider>
         <Box
           position="fixed"
@@ -80,7 +79,7 @@ function App() {
           >
             Game changer
           </Button>
-          <Img src={fridayGolf} alt="friday golf" />
+          <Logo src={fridayGolf} alt="friday golf" />
           <Adjuster
             initialPoints={points}
             initialRules={rules}
@@ -112,7 +111,7 @@ function App() {
   );
 }
 
-const Img = styled.img`
+const Logo = styled.img`
   height: 30px;
 
   ${props => props.theme.mediaQueries.md} {
@@ -124,11 +123,9 @@ const Wrapper = styled.div`
   min-height: 100vh;
   display: flex;
   align-items: center;
-
-  /* justify-content: space-between; */
 `;
 
-const SiteCSS = createGlobalStyle`
+const Global = createGlobalStyle`
   html, body {
     background-color: #0b0b0b;
   }

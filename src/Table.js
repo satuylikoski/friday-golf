@@ -13,16 +13,7 @@ export default function Table({ columns, data, updateMyData, skipPageReset }) {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    state: { pageIndex, pageSize }
+    page
   } = useTable(
     {
       columns,
