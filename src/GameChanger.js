@@ -11,6 +11,7 @@ import CallMissedOutgoingIcon from "@material-ui/icons/CallMissedOutgoing";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
+import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
 import Filter2Icon from "@material-ui/icons/Filter2";
@@ -64,7 +65,8 @@ export default function GameChanger({ isOn, index, onClose }) {
     20: <PersonPinCircleIcon className={classes.icon} />,
     21: <OndemandVideoIcon className={classes.icon} />,
     22: <SportsSoccerIcon className={classes.icon} />,
-    23: <FreeBreakfastIcon className={classes.icon} />
+    23: <FreeBreakfastIcon className={classes.icon} />,
+    24: <EmojiEmotionsIcon className={classes.icon} />
   };
 
   return (
