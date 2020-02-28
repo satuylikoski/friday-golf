@@ -23,7 +23,8 @@ export const changers = {
   21: "VR",
   22: "Football",
   23: "Cup in the middle",
-  24: "Positivity"
+  24: "Positivity",
+  25: "Silence"
 };
 
 export const rules = {
@@ -51,5 +52,6 @@ export const rules = {
   21: "You take your shot while watching a VR video",
   22: "Instead of using the golf club, you use your foot to get the ball in the hole. The ball must still start between the unicorn's legs.",
   23: "A cup or roll of tap is places between the 2 holes, to make it easier for the ball to go in",
-  24: "-1 1 point for the 1st negative comment, -2 for 2nd, -3 for 3rd etc."
+  24: "-1 1 point for the 1st negative comment, -2 for 2nd, -3 for 3rd etc.",
+  25: "You may not speak. Every time you speak, -1 point."
 };
