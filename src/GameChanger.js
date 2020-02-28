@@ -25,6 +25,7 @@ import LooksTwoIcon from "@material-ui/icons/LooksTwo";
 import MusicOffIcon from "@material-ui/icons/MusicOff";
 import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
+import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
 import RedditIcon from "@material-ui/icons/Reddit";
 import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
 import SportsSoccerIcon from "@material-ui/icons/SportsSoccer";
@@ -68,7 +69,8 @@ export default function GameChanger({ isOn, index, onClose }) {
     22: <SportsSoccerIcon className={classes.icon} />,
     23: <FreeBreakfastIcon className={classes.icon} />,
     24: <EmojiEmotionsIcon className={classes.icon} />,
-    25: <MusicOffIcon className={classes.icon} />
+    25: <MusicOffIcon className={classes.icon} />,
+    26: <PersonAddDisabledIcon className={classes.icon} />
   };
 
   return (
