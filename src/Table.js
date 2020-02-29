@@ -1,7 +1,6 @@
 import React from "react";
 import { useTable, usePagination } from "react-table";
 import styled from "styled-components";
-import { Text } from "@freska/freska-ui";
 
 // Be sure to pass our updateMyData and the skipPageReset option
 export default function Table({ columns, data, updateMyData, skipPageReset }) {
@@ -39,9 +38,9 @@ export default function Table({ columns, data, updateMyData, skipPageReset }) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <Text as="th" {...column.getHeaderProps()} color="white">
+                <th {...column.getHeaderProps()} style={{ color: "white" }}>
                   {column.render("Header")}
-                </Text>
+                </th>
               ))}
             </tr>
           ))}

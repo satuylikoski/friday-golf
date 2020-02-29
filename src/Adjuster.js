@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Box, Heading, Text } from "@freska/freska-ui";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MaterialUISlider from "@material-ui/core/Slider";
 import IconButton from "@material-ui/core/IconButton";
@@ -46,12 +46,13 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
       </Button>
 
       <Modal isOpen={isOpen} onClose={() => handleClose(null)}>
-        <Heading level={2}>Adjust</Heading>
-        <Text my={2}>Select min and max values</Text>
+        <h1>Adjust</h1>
+        <Box my={2}>
+          <p>Select min and max values</p>
+        </Box>
+
         <Box display="grid" style={{ gridTemplateColumns: "80px auto" }} mb={2}>
-          <Heading level={3} color="black">
-            Big
-          </Heading>
+          <h1>Big</h1>
           <Box
             display="flex"
             flexDirection="column"
@@ -60,8 +61,8 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
             mx={5}
           >
             <Box display="flex" justifyContent="space-between">
-              <Text color="black">{points.b[0]}</Text>
-              <Text color="black">{points.b[1]}</Text>
+              <p>{points.b[0]}</p>
+              <p>{points.b[1]}</p>
             </Box>
             <Slider
               min={-50}
@@ -75,9 +76,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
         </Box>
 
         <Box display="grid" style={{ gridTemplateColumns: "80px auto" }} mb={2}>
-          <Heading level={3} color="black">
-            Small
-          </Heading>
+          <h1>Small</h1>
           <Box
             display="flex"
             flexDirection="column"
@@ -86,8 +85,8 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
             mx={5}
           >
             <Box display="flex" justifyContent="space-between">
-              <Text color="black">{points.s[0]}</Text>
-              <Text color="black">{points.s[1]}</Text>
+              <p>{points.s[0]}</p>
+              <p>{points.s[1]}</p>
             </Box>
             <Slider
               min={-50}
@@ -101,9 +100,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
         </Box>
 
         <Box display="grid" style={{ gridTemplateColumns: "80px auto" }} mb={2}>
-          <Heading level={3} color="black">
-            Miss
-          </Heading>
+          <h1>Miss</h1>
           <Box
             display="flex"
             flexDirection="column"
@@ -112,8 +109,8 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
             mx={5}
           >
             <Box display="flex" justifyContent="space-between">
-              <Text color="black">{points.miss[0]}</Text>
-              <Text color="black">{points.miss[1]}</Text>
+              <p>{points.miss[0]}</p>
+              <p>{points.miss[1]}</p>
             </Box>
             <Slider
               min={-50}
@@ -126,9 +123,10 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
           </Box>
         </Box>
 
-        <Text mb={2}>Rules</Text>
+        <p>Rules</p>
 
         <FormControlLabel
+          mt={2}
           control={
             <Checkbox
               id="avoid-null"

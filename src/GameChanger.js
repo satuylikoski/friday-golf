@@ -1,40 +1,14 @@
 import React from "react";
+import isEmpty from "lodash/isEmpty";
 import { animated, useSpring } from "react-spring";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import Brightness3Icon from "@material-ui/icons/Brightness3";
-import CallMissedIcon from "@material-ui/icons/CallMissed";
-import CallMissedOutgoingIcon from "@material-ui/icons/CallMissedOutgoing";
-import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
-import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
-import Filter2Icon from "@material-ui/icons/Filter2";
-import FormatQuoteIcon from "@material-ui/icons/FormatQuote";
-import GolfCourseIcon from "@material-ui/icons/GolfCourse";
-import GpsFixedIcon from "@material-ui/icons/GpsFixed";
-import GroupIcon from "@material-ui/icons/Group";
-import HeightIcon from "@material-ui/icons/Height";
-import LoopIcon from "@material-ui/icons/Loop";
-import LooksTwoIcon from "@material-ui/icons/LooksTwo";
-import MusicOffIcon from "@material-ui/icons/MusicOff";
-import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
-import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
-import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
-import RedditIcon from "@material-ui/icons/Reddit";
-import ScatterPlotIcon from "@material-ui/icons/ScatterPlot";
-import SportsSoccerIcon from "@material-ui/icons/SportsSoccer";
-import TimerIcon from "@material-ui/icons/Timer";
-import WrapTextIcon from "@material-ui/icons/WrapText";
+import Icon from "@material-ui/core/Icon";
 
-import * as data from "./data";
-
-export default function GameChanger({ isOn, index, onClose }) {
+export default function GameChanger({ isOn, index, onClose, changers }) {
   const classes = useStyles();
 
   const props = useSpring({
@@ -43,35 +17,11 @@ export default function GameChanger({ isOn, index, onClose }) {
     transform: isOn ? "translateX(0)" : "translateX(-100%)"
   });
 
-  const iconMapping = {
-    0: <FavoriteIcon className={classes.icon} />,
-    1: <HeightIcon className={classes.icon} />,
-    2: <CallMissedIcon className={classes.icon} />,
-    3: <CallMissedOutgoingIcon className={classes.icon} />,
-    4: <CardGiftcardIcon className={classes.icon} />,
-    5: <LooksTwoIcon className={classes.icon} />,
-    6: <LoopIcon className={classes.icon} />,
-    7: <CompareArrowsIcon className={classes.icon} />,
-    8: <Brightness3Icon className={classes.icon} />,
-    9: <DeleteForeverIcon className={classes.icon} />,
-    10: <FormatQuoteIcon className={classes.icon} />,
-    11: <Filter2Icon className={classes.icon} />,
-    12: <LooksTwoIcon className={classes.icon} />,
-    13: <ScatterPlotIcon className={classes.icon} />,
-    14: <TimerIcon className={classes.icon} />,
-    15: <GolfCourseIcon className={classes.icon} />,
-    16: <GroupIcon className={classes.icon} />,
-    17: <WrapTextIcon className={classes.icon} />,
-    18: <RedditIcon className={classes.icon} />,
-    19: <GpsFixedIcon className={classes.icon} />,
-    20: <PersonPinCircleIcon className={classes.icon} />,
-    21: <OndemandVideoIcon className={classes.icon} />,
-    22: <SportsSoccerIcon className={classes.icon} />,
-    23: <FreeBreakfastIcon className={classes.icon} />,
-    24: <EmojiEmotionsIcon className={classes.icon} />,
-    25: <MusicOffIcon className={classes.icon} />,
-    26: <PersonAddDisabledIcon className={classes.icon} />
-  };
+  if (isEmpty(changers) || index === undefined) {
+    return null;
+  }
+
+  const iconName = changers[index].icon ? changers[index].icon : "favorite";
 
   return (
     <AnimatedBox style={props} color="white">
@@ -86,12 +36,12 @@ export default function GameChanger({ isOn, index, onClose }) {
           </IconButton>
         </Box>
 
-        <Box textAlign="center" mt={6} width="250px">
-          {iconMapping[index]}
+        <Box textAlign="center" mt={8} width="250px">
+          <Icon className={classes.icon}>{iconName}</Icon>
 
-          <RulesHeader>{data.changers[index]}</RulesHeader>
+          <RulesHeader>{changers[index].name}</RulesHeader>
 
-          <RulesText>{data.rules[index]}</RulesText>
+          <RulesText>{changers[index].description}</RulesText>
         </Box>
       </Box>
     </AnimatedBox>

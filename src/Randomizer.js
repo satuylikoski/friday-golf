@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading } from "@freska/freska-ui";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { animated, useSpring } from "react-spring";
 
@@ -99,11 +99,11 @@ const ColorButton = withStyles({
   }
 })(Button);
 
-const Point = styled(animated(Heading))`
+const Point = styled(animated.h1)`
   color: white;
   font-size: 60px;
 
-  ${props => props.theme.mediaQueries.md} {
+  @media only screen and (min-width: 600px) {
     font-size: 100px;
   }
 `;
@@ -114,18 +114,18 @@ const HoleName = styled.h1`
   letter-spacing: 3px;
   margin-bottom: 24px;
 
-  ${props => props.theme.mediaQueries.md} {
+  @media only screen and (min-width: 600px) {
     font-size: 36px;
   }
 `;
 
-const Description = styled(Heading)`
+const Description = styled.h2`
   color: white;
   font-size: 16px;
   font-weight: 400;
   margin-top: 24px;
 
-  ${props => props.theme.mediaQueries.md} {
+  @media only screen and (min-width: 600px) {
     font-size: 20px;
   }
 `;
