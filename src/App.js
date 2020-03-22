@@ -47,6 +47,7 @@ function App() {
       <Box
         display="flex"
         width="100%"
+        flexDirection={['column-reverse', 'row', 'row']}
         justifyContent="space-around"
         alignItems={['center', 'flex-start']}
         mt={3}
@@ -90,9 +91,11 @@ function App() {
 
 const Logo = styled.img`
   height: 20px;
+  order: 1;
 
   @media only screen and (min-width: 600px) {
     height: 70px;
+    order: 0;
   }
 
   @media only screen and (min-width: 1024px) {
