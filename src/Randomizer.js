@@ -20,12 +20,6 @@ export default function Randomizer() {
 
   const { points, rules } = store;
 
-  console.log(points, 'mososos');
-
-  useEffect(() => {
-    console.log('moi');
-  }, []);
-
   useEffect(() => {
     setB(0);
     setS(0);

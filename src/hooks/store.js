@@ -13,6 +13,7 @@ export class Randomizer {
   savedPoints = store.get('points');
   savedRules = store.get('rules');
 
+  // TODO: Do something about this
   bigHole = this.savedPoints ? this.savedPoints.big : [-10, 24];
   smallHole = this.savedPoints ? this.savedPoints.small : [-10, 25];
   miss = this.savedPoints ? this.savedPoints.miss : [0, 0];
@@ -21,7 +22,6 @@ export class Randomizer {
   notSameNumber = this.savedRules ? this.savedRules.notSameNumber : false;
 
   updatePoints = points => {
-    console.log('update');
     this.bigHole = points.big;
     this.smallHole = points.small;
     this.miss = points.miss;
@@ -37,7 +37,6 @@ export class Randomizer {
   };
 
   get points() {
-    console.log('get poits');
     return {
       big: this.bigHole,
       small: this.smallHole,
