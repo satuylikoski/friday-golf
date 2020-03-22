@@ -1,7 +1,9 @@
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import clsx from 'clsx';
 import MaterialUIButton from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Button = withStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     color: 'white',
     backgroundColor: '#0b0b0b',
@@ -19,8 +21,24 @@ const Button = withStyles({
     },
     '&:disabled': {
       color: 'grey'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '300px',
+      fontSize: '30px'
+    }
+  },
+  border: {
+    [theme.breakpoints.up('sm')]: {
+      borderColor: '#fcd13f'
     }
   }
-})(MaterialUIButton);
+}));
 
-export default Button;
+export default function Button({ children, highlight, ...rest }) {
+  const classes = useStyles();
+  return (
+    <MaterialUIButton className={clsx(classes.root, { [classes.border]: highlight })} {...rest}>
+      {children}
+    </MaterialUIButton>
+  );
+}

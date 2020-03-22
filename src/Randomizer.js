@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import { animated, useSpring } from 'react-spring';
+
+import Button from './components/Button';
 
 export default function Randomizer({ points, rules }) {
   const [b, setB] = useState(0);
@@ -47,6 +47,12 @@ export default function Randomizer({ points, rules }) {
   return (
     <>
       <Wrapper>
+        <Box style={{ gridColumn: '1 / span 3' }} mt={[0, 2, 3]} mb={[0, 0, 3]}>
+          <Button onClick={() => randomize()} highlight>
+            points randomizer
+          </Button>
+        </Box>
+
         <Box>
           <HoleName>big</HoleName>
           <Point>{spring.b.interpolate(b => b.toFixed(0))}</Point>
@@ -70,31 +76,10 @@ export default function Randomizer({ points, rules }) {
             From {points.miss[0]} to {points.miss[1]}
           </Description>
         </Box>
-
-        <ColorButton onClick={() => randomize()}>Randomize</ColorButton>
       </Wrapper>
     </>
   );
 }
-
-const ColorButton = withStyles({
-  root: {
-    gridColumn: '2',
-    color: 'white',
-    backgroundColor: '#0b0b0b',
-    fontFamily: 'Assistant',
-    textTransform: 'lowercase',
-    border: '3px solid #FBCE39',
-    fontSize: '30px',
-    fontWeight: '600',
-    padding: '20px 100px',
-    '&:hover': {
-      backgroundColor: '#0b0b0b',
-      color: 'white',
-      borderColor: '#0b0b0b'
-    }
-  }
-})(Button);
 
 const Point = styled(animated.h1)`
   color: white;
@@ -132,7 +117,6 @@ const Wrapper = styled(Box)`
   position: relative;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: auto auto;
-  grid-row-gap: 10vh;
 
   width: 100%;
 
