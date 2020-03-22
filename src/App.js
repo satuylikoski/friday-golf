@@ -1,48 +1,38 @@
-import React, { useState, useEffect } from "react";
-import store from "store";
-import Box from "@material-ui/core/Box";
-import styled, { createGlobalStyle } from "styled-components";
-import Tabletop from "tabletop";
+import React, { useState, useEffect } from 'react';
+import store from 'store';
+import isEmpty from 'lodash/isEmpty';
+import Box from '@material-ui/core/Box';
+import styled, { createGlobalStyle } from 'styled-components';
 
-import Button from "./components/Button";
+import Button from './components/Button';
 
-import fridayGolf from "./friday-golf.png";
-import ScoreTable from "./ScoreTable";
-import Randomizer from "./Randomizer";
-import Adjuster from "./Adjuster";
-import GameChanger from "./GameChanger";
+import randomChanger from './utils/randomChanger';
+import useChangers from './hooks/changers';
+
+import fridayGolf from './friday-golf.png';
+import ScoreTable from './ScoreTable';
+import Randomizer from './Randomizer';
+import Adjuster from './Adjuster';
+import GameChanger from './GameChanger';
 
 function App() {
-  const [isGameChangerOn, setIsGameChangerOn] = useState(false);
-  const [changers, setChangers] = useState({});
-  const [gameChangerIndex, setGameChangerIndex] = useState(undefined);
   const [points, setPoints] = useState({
     b: [-10, 25],
     s: [-10, 25],
     miss: [-10, 25]
   });
+  const changers = useChangers();
   const [rules, setRules] = useState({ avoidNull: false, notSame: false });
+  const [index, setIndex] = useState(0);
+  const [isChangerOpen, setIsChangerOpen] = useState(false);
 
   useEffect(() => {
-    Tabletop.init({
-      key: process.env.REACT_APP_GOOGLE_KEY,
-      callback: googleData => {
-        const filteredData = googleData.filter(
-          data => data.ready === "TRUE" && data.name.length > 0
-        );
-        setChangers(filteredData);
-      },
-      simpleSheet: true
-    });
-  }, []);
-
-  useEffect(() => {
-    const points = store.get("points");
+    const points = store.get('points');
     if (points) {
       setPoints(points);
     }
 
-    const rules = store.get("rules");
+    const rules = store.get('rules');
     if (rules) {
       setRules(rules);
     }
@@ -50,45 +40,23 @@ function App() {
 
   const showScoreTable = false;
 
-  const random = () => {
-    let newValue;
-    let usedValues = store.get("changers") || [];
-
-    if (Object.keys(changers).length === usedValues.length) {
-      usedValues = [];
-    }
-
-    do {
-      newValue = Math.floor(
-        Math.random() * (Object.keys(changers).length - 1 + 1) + 0
-      );
-    } while (usedValues.includes(newValue));
-
-    usedValues.push(newValue);
-    store.set("changers", usedValues);
-
-    return newValue;
-  };
-
   // Next: Add some animations if max or min reached e.g.
   return (
     <>
       <Global />
       <Box
-        position="fixed"
         display="flex"
         width="100%"
         justifyContent="space-around"
-        alignItems="flex-start"
+        alignItems={['center', 'flex-start']}
         mt={3}
       >
         <Button
           onClick={() => {
-            if (!isGameChangerOn) {
-              setIsGameChangerOn(true);
-            }
-            setGameChangerIndex(random());
+            setIndex(randomChanger(changers));
+            setIsChangerOpen(true);
           }}
+          disabled={isEmpty(changers)}
         >
           Game changer
         </Button>
@@ -99,24 +67,20 @@ function App() {
           onUpdate={(points, rules) => {
             setPoints(points);
             setRules(rules);
-            store.set("rules", rules);
-            store.set("points", points);
+            store.set('rules', rules);
+            store.set('points', points);
           }}
         />
       </Box>
 
       <Wrapper>
         <GameChanger
-          isOn={isGameChangerOn}
-          index={gameChangerIndex}
-          onClose={() => setIsGameChangerOn(false)}
+          isOpen={isChangerOpen}
           changers={changers}
+          index={index}
+          onClose={() => setIsChangerOpen(false)}
         />
-        <Randomizer
-          points={points}
-          rules={rules}
-          isGameChangerOn={isGameChangerOn}
-        />
+        <Randomizer points={points} rules={rules} />
       </Wrapper>
 
       {showScoreTable && <ScoreTable />}
@@ -125,17 +89,26 @@ function App() {
 }
 
 const Logo = styled.img`
-  height: 30px;
+  height: 20px;
 
   @media only screen and (min-width: 600px) {
-    height: 140px;
+    height: 70px;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    height: 100px;
   }
 `;
 
 const Wrapper = styled.div`
-  min-height: 100vh;
   display: flex;
   align-items: center;
+
+  flex-direction: column;
+
+  @media only screen and (min-width: 1024px) {
+    flex-direction: row;
+  }
 `;
 
 const Global = createGlobalStyle`

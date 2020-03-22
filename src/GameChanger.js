@@ -1,60 +1,67 @@
-import React from "react";
-import isEmpty from "lodash/isEmpty";
-import { animated, useSpring } from "react-spring";
-import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
+import React from 'react';
+import isEmpty from 'lodash/isEmpty';
+import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
-export default function GameChanger({ isOn, index, onClose, changers }) {
+export default function GameChanger({ changers, index, isOpen, onClose }) {
   const classes = useStyles();
 
-  const props = useSpring({
-    width: isOn ? "400px" : "0px",
-    visibility: isOn ? "visible" : "hidden",
-    transform: isOn ? "translateX(0)" : "translateX(-100%)"
-  });
-
-  if (isEmpty(changers) || index === undefined) {
+  if (isEmpty(changers)) {
     return null;
   }
 
-  const iconName = changers[index].icon ? changers[index].icon : "favorite";
-
   return (
-    <AnimatedBox style={props} color="white">
-      <Box width="300px">
-        <Box position="absolute" top="20px" left="20px">
-          <h4 style={{ color: "white" }}>Game changer</h4>
+    <>
+      <AnimatedBox
+        color="white"
+        position="relative"
+        isOpen={isOpen}
+        className={isOpen ? 'active' : null}
+      >
+        <Box px={[2, 4, 2]} pt={[2, 4, 4]} pb={[2, 4, 2]}>
+          <Box position="absolute" top="6px" right="6px">
+            <IconButton onClick={onClose}>
+              <CloseIcon fontSize="small" style={{ color: '#ffffff' }} />
+            </IconButton>
+          </Box>
+
+          <Box>
+            <Icon className={classes.icon}>
+              {changers[index].icon ? changers[index].icon : 'favorite'}
+            </Icon>
+
+            <RulesHeader>{changers[index].name}</RulesHeader>
+
+            <RulesText>{changers[index].description}</RulesText>
+          </Box>
         </Box>
-
-        <Box position="absolute" top="6px" right="6px">
-          <IconButton onClick={() => onClose()}>
-            <CloseIcon fontSize="small" style={{ color: "#ffffff" }} />
-          </IconButton>
-        </Box>
-
-        <Box textAlign="center" mt={8} width="250px">
-          <Icon className={classes.icon}>{iconName}</Icon>
-
-          <RulesHeader>{changers[index].name}</RulesHeader>
-
-          <RulesText>{changers[index].description}</RulesText>
-        </Box>
-      </Box>
-    </AnimatedBox>
+      </AnimatedBox>
+    </>
   );
 }
 
-const AnimatedBox = styled(animated(Box))`
-  height: 65vh;
-
+const AnimatedBox = styled(Box)`
   background-color: #202020;
-  padding: 16px;
   border-radius: 0 4px 4px 0;
   overflow-x: hidden;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  width: 100vw;
+  height: ${props => (props.isOpen ? '300px' : 0)};
+
+  @media only screen and (min-width: 1024px) {
+    height: 65vh;
+    width: ${props => (props.isOpen ? '500px' : 0)};
+  }
+
+  transition: all 0.5s;
 `;
 
 const RulesText = styled.h5`
@@ -64,6 +71,8 @@ const RulesText = styled.h5`
   text-align: left;
 
   overflow-y: scroll;
+
+  max-width: 800px;
 `;
 
 const RulesHeader = styled.h2`
@@ -75,7 +84,7 @@ const RulesHeader = styled.h2`
 
 const useStyles = makeStyles({
   icon: {
-    fontSize: "4rem",
-    color: "#fcd13f"
+    fontSize: '4rem',
+    color: '#fcd13f'
   }
 });

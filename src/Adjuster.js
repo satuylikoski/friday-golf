@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import MaterialUISlider from "@material-ui/core/Slider";
-import IconButton from "@material-ui/core/IconButton";
-import MaterialUICheckbox from "@material-ui/core/Checkbox";
-import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
-import ReplayIcon from "@material-ui/icons/Replay";
-import CheckIcon from "@material-ui/icons/Check";
+import React, { useState } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MaterialUISlider from '@material-ui/core/Slider';
+import IconButton from '@material-ui/core/IconButton';
+import MaterialUICheckbox from '@material-ui/core/Checkbox';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import ReplayIcon from '@material-ui/icons/Replay';
+import CheckIcon from '@material-ui/icons/Check';
 
-import Button from "./components/Button";
-import Modal from "./components/Modal";
+import Button from './components/Button';
+import Modal from './components/Modal';
 
 export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
   const classes = useStyles();
@@ -51,7 +51,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
           <p>Select min and max values</p>
         </Box>
 
-        <Box display="grid" style={{ gridTemplateColumns: "80px auto" }} mb={2}>
+        <Box display="grid" style={{ gridTemplateColumns: '80px auto' }} mb={2}>
           <h1>Big</h1>
           <Box
             display="flex"
@@ -68,14 +68,12 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
               min={-50}
               max={50}
               value={points.b}
-              onChange={(event, newValue) =>
-                handleSetPoints({ ...points, b: newValue })
-              }
+              onChange={(event, newValue) => handleSetPoints({ ...points, b: newValue })}
             />
           </Box>
         </Box>
 
-        <Box display="grid" style={{ gridTemplateColumns: "80px auto" }} mb={2}>
+        <Box display="grid" style={{ gridTemplateColumns: '80px auto' }} mb={2}>
           <h1>Small</h1>
           <Box
             display="flex"
@@ -92,14 +90,12 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
               min={-50}
               max={50}
               value={points.s}
-              onChange={(event, newValue) =>
-                handleSetPoints({ ...points, s: newValue })
-              }
+              onChange={(event, newValue) => handleSetPoints({ ...points, s: newValue })}
             />
           </Box>
         </Box>
 
-        <Box display="grid" style={{ gridTemplateColumns: "80px auto" }} mb={2}>
+        <Box display="grid" style={{ gridTemplateColumns: '80px auto' }} mb={2}>
           <h1>Miss</h1>
           <Box
             display="flex"
@@ -116,9 +112,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
               min={-50}
               max={50}
               value={points.miss}
-              onChange={(event, newValue) =>
-                handleSetPoints({ ...points, miss: newValue })
-              }
+              onChange={(event, newValue) => handleSetPoints({ ...points, miss: newValue })}
             />
           </Box>
         </Box>
@@ -133,9 +127,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
               checkedIcon={<EmojiEmotionsIcon />}
               name="avoid-null-check"
               checked={rules.avoidNull}
-              onChange={() =>
-                handleSetRules({ ...rules, avoidNull: !rules.avoidNull })
-              }
+              onChange={() => handleSetRules({ ...rules, avoidNull: !rules.avoidNull })}
               className={classes.checkbox}
             />
           }
@@ -149,9 +141,7 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
               checkedIcon={<EmojiEmotionsIcon />}
               name="not-same-check"
               checked={rules.notSame}
-              onChange={() =>
-                handleSetRules({ ...rules, notSame: !rules.notSame })
-              }
+              onChange={() => handleSetRules({ ...rules, notSame: !rules.notSame })}
             />
           }
           label="Not same numbers in a row"
@@ -179,23 +169,23 @@ export default function Adjuster({ onUpdate, initialPoints, initialRules }) {
 
 const Slider = withStyles({
   root: {
-    color: "#fcd13f",
+    color: '#fcd13f',
     height: 8
   },
   thumb: {
     height: 24,
     width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
     marginTop: -8,
     marginLeft: -12,
-    "&:focus,&:hover,&$active": {
-      boxShadow: "inherit"
+    '&:focus,&:hover,&$active': {
+      boxShadow: 'inherit'
     }
   },
   active: {},
   valueLabel: {
-    left: "calc(-50% + 4px)"
+    left: 'calc(-50% + 4px)'
   },
   track: {
     height: 8,
@@ -210,8 +200,8 @@ const Slider = withStyles({
 const Checkbox = withStyles({
   root: {
     // color: "#fbbe39",
-    "&$checked": {
-      color: "#fbbe39"
+    '&$checked': {
+      color: '#fbbe39'
     }
   },
   checked: {}
@@ -219,25 +209,25 @@ const Checkbox = withStyles({
 
 const useStyles = makeStyles({
   check: {
-    color: "#22bb33",
-    fontSize: "3rem"
+    color: '#22bb33',
+    fontSize: '3rem'
   },
   cancel: {
-    color: "#d11a2a",
-    fontSize: "3rem"
+    color: '#d11a2a',
+    fontSize: '3rem'
   },
   close: {
-    color: "#D0D0D0",
-    fontSize: "2rem"
+    color: '#D0D0D0',
+    fontSize: '2rem'
   },
   form: {
-    display: "block"
+    display: 'block'
   },
   checkbox: {
     root: {
-      color: "green",
-      "&$checked": {
-        color: "#fbbe39"
+      color: 'green',
+      '&$checked': {
+        color: '#fbbe39'
       }
     }
   }

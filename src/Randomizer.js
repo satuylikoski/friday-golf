@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import { animated, useSpring } from "react-spring";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import { animated, useSpring } from 'react-spring';
 
 export default function Randomizer({ points, rules }) {
   const [b, setB] = useState(0);
@@ -30,10 +30,7 @@ export default function Randomizer({ points, rules }) {
     if (rules.avoidNull || rules.notSame) {
       do {
         newValue = Math.floor(Math.random() * (max - min + 1) + min);
-      } while (
-        (newValue === current && rules.notSame) ||
-        (rules.avoidNull && newValue === 0)
-      );
+      } while ((newValue === current && rules.notSame) || (rules.avoidNull && newValue === 0));
     } else {
       newValue = Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -49,7 +46,7 @@ export default function Randomizer({ points, rules }) {
 
   return (
     <>
-      <Wrapper mt={10}>
+      <Wrapper>
         <Box>
           <HoleName>big</HoleName>
           <Point>{spring.b.interpolate(b => b.toFixed(0))}</Point>
@@ -82,19 +79,19 @@ export default function Randomizer({ points, rules }) {
 
 const ColorButton = withStyles({
   root: {
-    gridColumn: "2",
-    color: "white",
-    backgroundColor: "#0b0b0b",
-    fontFamily: "Assistant",
-    textTransform: "lowercase",
-    border: "3px solid #FBCE39",
-    fontSize: "30px",
-    fontWeight: "600",
-    padding: "20px 100px",
-    "&:hover": {
-      backgroundColor: "#0b0b0b",
-      color: "white",
-      borderColor: "#0b0b0b"
+    gridColumn: '2',
+    color: 'white',
+    backgroundColor: '#0b0b0b',
+    fontFamily: 'Assistant',
+    textTransform: 'lowercase',
+    border: '3px solid #FBCE39',
+    fontSize: '30px',
+    fontWeight: '600',
+    padding: '20px 100px',
+    '&:hover': {
+      backgroundColor: '#0b0b0b',
+      color: 'white',
+      borderColor: '#0b0b0b'
     }
   }
 })(Button);
