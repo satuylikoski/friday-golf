@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { animated, useSpring } from 'react-spring';
 
+import useStore from './hooks/store';
 import Button from './components/Button';
 
-export default function Randomizer({ points, rules }) {
+export default function Randomizer() {
+  const [isOpen, setIsOpen] = useState(false);
+  const store = useStore();
   const [b, setB] = useState(0);
   const [s, setS] = useState(0);
   const [miss, setMiss] = useState(0);
@@ -13,6 +17,14 @@ export default function Randomizer({ points, rules }) {
     from: { b: 0, s: 0, miss: 0 },
     to: { b, s, miss }
   });
+
+  const { points, rules } = store;
+
+  console.log(points, 'mososos');
+
+  useEffect(() => {
+    console.log('moi');
+  }, []);
 
   useEffect(() => {
     setB(0);
@@ -27,7 +39,7 @@ export default function Randomizer({ points, rules }) {
       return min;
     }
 
-    if (rules.avoidNull || rules.notSame) {
+    if (rules.avoidNull || rules.notSameNumber) {
       do {
         newValue = Math.floor(Math.random() * (max - min + 1) + min);
       } while ((newValue === current && rules.notSame) || (rules.avoidNull && newValue === 0));
@@ -39,45 +51,56 @@ export default function Randomizer({ points, rules }) {
   }
 
   const randomize = () => {
-    setB(rnd(b, points.b));
-    setS(rnd(s, points.s));
+    setB(rnd(b, points.big));
+    setS(rnd(s, points.small));
     setMiss(rnd(miss, points.miss));
   };
 
   return (
-    <>
-      <Wrapper>
-        <Box style={{ gridColumn: '1 / span 3' }} mt={[0, 2, 3]} mb={[0, 0, 3]}>
-          <Button onClick={() => randomize()} highlight>
-            points randomizer
-          </Button>
-        </Box>
+    <Observer>
+      {() => (
+        <Wrapper>
+          <Box style={{ gridColumn: '1 / span 3' }} mt={[0, 2, 3]} mb={[0, 0, 3]}>
+            <Button
+              onClick={() => {
+                randomize();
+                setIsOpen(true);
+              }}
+              highlight
+            >
+              points randomizer
+            </Button>
+          </Box>
+          {isOpen && (
+            <>
+              <Box>
+                <HoleName>big</HoleName>
+                <Point>{spring.b.interpolate(b => b.toFixed(0))}</Point>
+                <Description>
+                  From {store.points.big[0]} to {points.big[1]}
+                </Description>
+              </Box>
 
-        <Box>
-          <HoleName>big</HoleName>
-          <Point>{spring.b.interpolate(b => b.toFixed(0))}</Point>
-          <Description>
-            From {points.b[0]} to {points.b[1]}
-          </Description>
-        </Box>
+              <Box>
+                <HoleName>small</HoleName>
+                <Point>{spring.s.interpolate(s => s.toFixed(0))}</Point>
+                <Description>
+                  From {points.small[0]} to {points.small[1]}
+                </Description>
+              </Box>
 
-        <Box>
-          <HoleName>small</HoleName>
-          <Point>{spring.s.interpolate(s => s.toFixed(0))}</Point>
-          <Description>
-            From {points.s[0]} to {points.s[1]}
-          </Description>
-        </Box>
-
-        <Box>
-          <HoleName>miss</HoleName>
-          <Point>{spring.miss.interpolate(miss => miss.toFixed(0))}</Point>
-          <Description>
-            From {points.miss[0]} to {points.miss[1]}
-          </Description>
-        </Box>
-      </Wrapper>
-    </>
+              <Box>
+                <HoleName>miss</HoleName>
+                <Point>{spring.miss.interpolate(miss => miss.toFixed(0))}</Point>
+                <Description>
+                  From {points.miss[0]} to {points.miss[1]}
+                </Description>
+              </Box>
+            </>
+          )}
+        </Wrapper>
+      )}
+    </Observer>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Observer } from 'mobx-react-lite';
 import isEmpty from 'lodash/isEmpty';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,8 +8,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 
-export default function GameChanger({ changers, index, isOpen, onClose }) {
+import useStore from './hooks/store';
+
+export default function GameChanger({ changers }) {
   const classes = useStyles();
+  const store = useStore();
 
   if (isEmpty(changers)) {
     return null;
@@ -16,25 +20,31 @@ export default function GameChanger({ changers, index, isOpen, onClose }) {
 
   return (
     <>
-      <AnimatedBox color="white" position="relative" opened={isOpen ? 1 : 0}>
-        <Box px={[2, 4, 2]} pt={[2, 4, 4]} pb={[2, 4, 2]}>
-          <Box position="absolute" top="6px" right="6px">
-            <IconButton onClick={onClose}>
-              <CloseIcon fontSize="small" style={{ color: '#ffffff' }} />
-            </IconButton>
-          </Box>
+      <Observer>
+        {() => (
+          <AnimatedBox color="white" position="relative" opened={store.isChangerOpen ? 1 : 0}>
+            <Box px={[2, 4, 2]} pt={[2, 4, 4]} pb={[2, 4, 2]}>
+              <Box position="absolute" top="6px" right="6px">
+                <IconButton onClick={store.closeChanger}>
+                  <CloseIcon fontSize="small" style={{ color: '#ffffff' }} />
+                </IconButton>
+              </Box>
 
-          <Box>
-            <Icon className={classes.icon}>
-              {changers[index].icon ? changers[index].icon : 'favorite'}
-            </Icon>
+              <Box>
+                <Icon className={classes.icon}>
+                  {changers[store.changerIndex].icon
+                    ? changers[store.changerIndex].icon
+                    : 'favorite'}
+                </Icon>
 
-            <RulesHeader>{changers[index].name}</RulesHeader>
+                <RulesHeader>{changers[store.changerIndex].name}</RulesHeader>
 
-            <RulesText>{changers[index].description}</RulesText>
-          </Box>
-        </Box>
-      </AnimatedBox>
+                <RulesText>{changers[store.changerIndex].description}</RulesText>
+              </Box>
+            </Box>
+          </AnimatedBox>
+        )}
+      </Observer>
     </>
   );
 }
