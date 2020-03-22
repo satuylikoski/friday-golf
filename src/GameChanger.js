@@ -16,12 +16,7 @@ export default function GameChanger({ changers, index, isOpen, onClose }) {
 
   return (
     <>
-      <AnimatedBox
-        color="white"
-        position="relative"
-        isOpen={isOpen}
-        className={isOpen ? 'active' : null}
-      >
+      <AnimatedBox color="white" position="relative" opened={isOpen ? 1 : 0}>
         <Box px={[2, 4, 2]} pt={[2, 4, 4]} pb={[2, 4, 2]}>
           <Box position="absolute" top="6px" right="6px">
             <IconButton onClick={onClose}>
@@ -54,11 +49,11 @@ const AnimatedBox = styled(Box)`
   text-align: center;
 
   width: 100vw;
-  height: ${props => (props.isOpen ? '300px' : 0)};
+  height: ${props => (props.opened ? '300px' : 0)};
 
   @media only screen and (min-width: 1024px) {
     height: 65vh;
-    width: ${props => (props.isOpen ? '500px' : 0)};
+    width: ${props => (props.opened ? '500px' : 0)};
   }
 
   transition: all 0.5s;
