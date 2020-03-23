@@ -8,7 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 
-import useStore from './hooks/store';
+import useStore from '../hooks/store';
 
 export default function GameChanger({ changers }) {
   const classes = useStyles();

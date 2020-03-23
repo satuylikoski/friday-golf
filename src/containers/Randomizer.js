@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { animated, useSpring } from 'react-spring';
 
-import useStore from './hooks/store';
-import Button from './components/Button';
+import useStore from '../hooks/store';
+import Button from '../components/Button';
 
 export default function Randomizer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,6 +55,7 @@ export default function Randomizer() {
       {() => (
         <Wrapper>
           <Box style={{ gridColumn: '1 / span 3' }} mt={[0, 2, 3]} mb={[0, 0, 3]}>
+            {/* TODO: Move me away */}
             <Button
               onClick={() => {
                 randomize();

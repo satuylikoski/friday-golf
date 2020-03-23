@@ -10,9 +10,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Link from '@material-ui/core/Link';
 
-import Modal from './components/Modal';
+import Modal from '../components/Modal';
 
-export default function Rules() {
+export default function Instructions() {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
 

@@ -3,15 +3,16 @@ import isEmpty from 'lodash/isEmpty';
 import Box from '@material-ui/core/Box';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import Button from './components/Button';
+import fridayGolf from './assets/friday-golf.png';
 import useChangers from './hooks/changers';
-
-import fridayGolf from './friday-golf.png';
-import Randomizer from './Randomizer';
-import Settings from './Settings';
-import Rules from './Rules';
-import GameChanger from './GameChanger';
 import useStore from './hooks/store';
+
+import Randomizer from './containers/Randomizer';
+import Settings from './containers/Settings';
+import Instructions from './containers/Instructions';
+import GameChanger from './containers/GameChanger';
+
+import Button from './components/Button';
 
 function App() {
   const changers = useChangers();
@@ -26,7 +27,7 @@ function App() {
       </Box>
 
       <Settings />
-      <Rules />
+      <Instructions />
 
       <Box display="flex" justifyContent="center" mt={2}>
         <Button onClick={() => store.randomizeChanger(changers)} disabled={isEmpty(changers)}>

@@ -10,6 +10,9 @@ export default function useStore() {
 
 export class Randomizer {
   // ----- Points
+  // randomize
+
+  // ----- Settings
   savedPoints = store.get('points');
   savedRules = store.get('rules');
 
@@ -88,6 +91,7 @@ export class Randomizer {
 
 decorate(Randomizer, {
   // ----- Points
+  // ----- Settings
   points: computed,
   rules: computed,
   updatePoints: action,

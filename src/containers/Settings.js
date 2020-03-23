@@ -9,12 +9,11 @@ import MaterialUICheckbox from '@material-ui/core/Checkbox';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import ReplayIcon from '@material-ui/icons/Replay';
 import CheckIcon from '@material-ui/icons/Check';
-
 import Icon from '@material-ui/core/Icon';
 
-import useStore from './hooks/store';
+import useStore from '../hooks/store';
 
-import Modal from './components/Modal';
+import Modal from '../components/Modal';
 
 export default function Settings() {
   const classes = useStyles();
