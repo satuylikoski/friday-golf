@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { ThemeProvider } from '@material-ui/core/styles';
+
 import { Randomizer } from './hooks/store';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider } from './context';
+import theme from './theme';
+
+import App from './App';
 
 const randomizer = new Randomizer();
 
 ReactDOM.render(
   <StoreProvider value={randomizer}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </StoreProvider>,
   document.getElementById('root')
 );

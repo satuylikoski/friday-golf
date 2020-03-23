@@ -7,7 +7,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     color: 'white',
     backgroundColor: '#0b0b0b',
-    fontFamily: 'Assistant',
     textTransform: 'lowercase',
     border: '2px solid #0b0b0b',
     boxShadow: 'none',

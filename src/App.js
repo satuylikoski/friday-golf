@@ -8,7 +8,8 @@ import useChangers from './hooks/changers';
 
 import fridayGolf from './friday-golf.png';
 import Randomizer from './Randomizer';
-import Adjuster from './Adjuster';
+import Settings from './Settings';
+import Rules from './Rules';
 import GameChanger from './GameChanger';
 import useStore from './hooks/store';
 
@@ -20,19 +21,17 @@ function App() {
   return (
     <>
       <Global />
-      <Box
-        display="flex"
-        width="100%"
-        flexDirection={['column-reverse', 'row', 'row']}
-        justifyContent="space-around"
-        alignItems={['center', 'flex-start']}
-        mt={3}
-      >
+      <Box display="flex" justifyContent="center" as="header">
+        <Logo src={fridayGolf} alt="friday golf" />
+      </Box>
+
+      <Settings />
+      <Rules />
+
+      <Box display="flex" justifyContent="center" mt={2}>
         <Button onClick={() => store.randomizeChanger(changers)} disabled={isEmpty(changers)}>
           Game changer
         </Button>
-        <Logo src={fridayGolf} alt="friday golf" />
-        <Adjuster />
       </Box>
 
       <Wrapper>
@@ -44,12 +43,10 @@ function App() {
 }
 
 const Logo = styled.img`
-  height: 20px;
-  order: 1;
+  height: 40px;
 
   @media only screen and (min-width: 600px) {
     height: 70px;
-    order: 0;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -71,6 +68,8 @@ const Wrapper = styled.div`
 const Global = createGlobalStyle`
   html, body {
     background-color: #0b0b0b;
+    margin-top: 10px;
+    font-family: 'Catamaran', sans-serif;
   }
 `;
 
