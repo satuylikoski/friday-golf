@@ -17,7 +17,7 @@ import Modal from '../components/Modal';
 
 export default function Settings() {
   const classes = useStyles();
-  const store = useStore();
+  const store = useStore('settings');
   const [isOpen, setIsOpen] = useState(false);
   const [points, setPoints] = useState(store.points);
   const [rules, setRules] = useState(store.rules);
@@ -47,8 +47,6 @@ export default function Settings() {
     }
   };
 
-  // TODO: Make the initial same as current initial
-  // save to local storage
   return (
     <Observer>
       {() => (

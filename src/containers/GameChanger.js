@@ -12,7 +12,7 @@ import useStore from '../hooks/store';
 
 export default function GameChanger({ changers }) {
   const classes = useStyles();
-  const store = useStore();
+  const store = useStore('gameChanger');
 
   if (isEmpty(changers)) {
     return null;

@@ -1,53 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { animated, useSpring } from 'react-spring';
 
 import useStore from '../hooks/store';
+import random from '../utils/random';
+
 import Button from '../components/Button';
 
 export default function Randomizer() {
-  const [isOpen, setIsOpen] = useState(false);
-  const store = useStore();
-  const [b, setB] = useState(0);
-  const [s, setS] = useState(0);
+  const [isOpen, setIsOpen] = useState(true);
+  const store = useStore('settings');
+
+  const [big, setBig] = useState(0);
+  const [small, setS] = useState(0);
   const [miss, setMiss] = useState(0);
-  const spring = useSpring({
-    from: { b: 0, s: 0, miss: 0 },
-    to: { b, s, miss }
+
+  const current = useSpring({
+    from: { big: 0, small: 0, miss: 0 },
+    to: { big, small, miss }
   });
 
-  const { points, rules } = store;
-
-  useEffect(() => {
-    setB(0);
-    setS(0);
-    setMiss(0);
-  }, [points]);
-
-  function rnd(current, [min, max]) {
-    let newValue;
-
-    if (min === max) {
-      return min;
-    }
-
-    if (rules.avoidNull || rules.notSameNumber) {
-      do {
-        newValue = Math.floor(Math.random() * (max - min + 1) + min);
-      } while ((newValue === current && rules.notSame) || (rules.avoidNull && newValue === 0));
-    } else {
-      newValue = Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
-    return newValue;
-  }
-
   const randomize = () => {
-    setB(rnd(b, points.big));
-    setS(rnd(s, points.small));
-    setMiss(rnd(miss, points.miss));
+    const { points, rules } = store;
+
+    setBig(random(points.big, big, rules));
+    setS(random(points.small, small, rules));
+    setMiss(random(points.miss, miss, rules));
   };
 
   return (
@@ -70,25 +50,25 @@ export default function Randomizer() {
             <>
               <Box>
                 <HoleName>big</HoleName>
-                <Point>{spring.b.interpolate(b => b.toFixed(0))}</Point>
+                <Point>{current.big.interpolate(b => b.toFixed(0))}</Point>
                 <Description>
-                  From {store.points.big[0]} to {points.big[1]}
+                  From {store.bigHole[0]} to {store.bigHole[1]}
                 </Description>
               </Box>
 
               <Box>
                 <HoleName>small</HoleName>
-                <Point>{spring.s.interpolate(s => s.toFixed(0))}</Point>
+                <Point>{current.small.interpolate(s => s.toFixed(0))}</Point>
                 <Description>
-                  From {points.small[0]} to {points.small[1]}
+                  From {store.smallHole[0]} to {store.smallHole[1]}
                 </Description>
               </Box>
 
               <Box>
                 <HoleName>miss</HoleName>
-                <Point>{spring.miss.interpolate(miss => miss.toFixed(0))}</Point>
+                <Point>{current.miss.interpolate(miss => miss.toFixed(0))}</Point>
                 <Description>
-                  From {points.miss[0]} to {points.miss[1]}
+                  From {store.miss[0]} to {store.miss[1]}
                 </Description>
               </Box>
             </>

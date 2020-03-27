@@ -21,7 +21,8 @@
     "store": "^2.0.12",
     "styled-components": "^4.4.1",
     "styled-system": "^5.1.4",
-    "tabletop": "^1.6.2"
+    "tabletop": "^1.6.2",
+    "typescript": "^3.8.3"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^3.0.1",

@@ -59,12 +59,6 @@ export default function Instructions() {
                 and 9. <br />
                 Now it's time to go to the settings to select the rest. <br />
                 <strong>More instructions to come!</strong>
-                {/* Then go to the settings and decide how many randomizers you want to have. For example, if you have a
-            mini golf set that has one big hole and one small hole, you can have up to three
-            randomizers: one point randomizer for a scenario when a ball goes into a big hole, one
-            for small hole and one if a player misses. Then you need to adjust the point ranges.
-            Ranges can be set between -50 to 50 points. For example if you set a 20-40 range for big
-            hole, it means that randomizer can give you points between 20 and 40. */}
               </Typography>
             </ExpansionCard>
           </Box>

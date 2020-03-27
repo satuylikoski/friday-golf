@@ -2,17 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import { Randomizer } from './hooks/store';
+import { GameChanger } from './stores/GameChanger';
+import { Settings } from './stores/Settings';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider } from './context';
 import theme from './theme';
 
 import App from './App';
 
-const randomizer = new Randomizer();
+const stores = {
+  gameChanger: new GameChanger(),
+  settings: new Settings()
+};
 
 ReactDOM.render(
-  <StoreProvider value={randomizer}>
+  <StoreProvider value={stores}>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>

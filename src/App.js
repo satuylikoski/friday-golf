@@ -16,7 +16,7 @@ import Button from './components/Button';
 
 function App() {
   const changers = useChangers();
-  const store = useStore();
+  const store = useStore('gameChanger');
 
   // Next: Add some animations if max or min reached e.g.
   return (
@@ -57,7 +57,7 @@ const Logo = styled.img`
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   flex-direction: column;
 
