@@ -59,7 +59,7 @@ const AnimatedBox = styled(Box)`
   text-align: center;
 
   width: 100vw;
-  height: ${props => (props.opened ? '300px' : 0)};
+  height: ${props => (props.opened ? '400px' : 0)};
 
   @media only screen and (min-width: 1024px) {
     height: 65vh;

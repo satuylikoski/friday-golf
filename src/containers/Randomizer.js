@@ -1,34 +1,22 @@
 import React, { useState } from 'react';
-import { Observer } from 'mobx-react-lite';
+import { Observer, useObserver } from 'mobx-react-lite';
 import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import { animated, useSpring } from 'react-spring';
 
 import useStore from '../hooks/store';
-import random from '../utils/random';
 
 import Button from '../components/Button';
 
 export default function Randomizer() {
   const [isOpen, setIsOpen] = useState(true);
   const store = useStore('settings');
-
-  const [big, setBig] = useState(0);
-  const [small, setS] = useState(0);
-  const [miss, setMiss] = useState(0);
+  const points = useObserver(() => store.currentPoints);
 
   const current = useSpring({
     from: { big: 0, small: 0, miss: 0 },
-    to: { big, small, miss }
+    to: { big: points[0], small: points[1], miss: points[2] }
   });
-
-  const randomize = () => {
-    const { points, rules } = store;
-
-    setBig(random(points.big, big, rules));
-    setS(random(points.small, small, rules));
-    setMiss(random(points.miss, miss, rules));
-  };
 
   return (
     <Observer>
@@ -38,8 +26,11 @@ export default function Randomizer() {
             {/* TODO: Move me away */}
             <Button
               onClick={() => {
-                randomize();
-                setIsOpen(true);
+                store.randomize();
+
+                if (!isOpen) {
+                  setIsOpen(true);
+                }
               }}
               highlight
             >

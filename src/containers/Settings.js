@@ -19,7 +19,7 @@ export default function Settings() {
   const classes = useStyles();
   const store = useStore('settings');
   const [isOpen, setIsOpen] = useState(false);
-  const [points, setPoints] = useState(store.points);
+  const [points, setPoints] = useState(store.pointRanges);
   const [rules, setRules] = useState(store.rules);
 
   const handleSetPoints = points => {
@@ -164,6 +164,7 @@ export default function Settings() {
                 className={classes.form}
               ></FormControlLabel>
             </Box>
+
             <Box
               position="sticky"
               bottom={0}

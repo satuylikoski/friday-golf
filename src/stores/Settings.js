@@ -1,7 +1,9 @@
 import { action, autorun, computed, decorate, observable } from 'mobx';
 import store from 'store';
 
-const defaultPoints = type => {
+import random from '../utils/random';
+
+const initialRange = type => {
   const savedPoints = store.get('points');
 
   if (savedPoints) {
@@ -11,7 +13,7 @@ const defaultPoints = type => {
   return [-50, 50];
 };
 
-const defaultRule = rule => {
+const initialRule = rule => {
   const savedRules = store.get('rules');
 
   if (savedRules) {
@@ -22,15 +24,17 @@ const defaultRule = rule => {
 };
 
 export class Settings {
-  bigHole = defaultPoints('big');
-  smallHole = defaultPoints('small');
-  miss = defaultPoints('miss');
+  bigHole = initialRange('big');
+  smallHole = initialRange('small');
+  miss = initialRange('miss');
 
-  avoidNull = defaultRule('avoidNull');
-  notSameNumber = defaultRule('notSameNumber');
+  avoidNull = initialRule('avoidNull');
+  notSameNumber = initialRule('notSameNumber');
+
+  currentPoints = [0, 0, 0];
 
   constructor() {
-    autorun(() => [this.bigHole, this.smallHole, this.miss]);
+    autorun(() => [this.bigHole, this.smallHole, this.miss, this.currentPoints]);
   }
 
   updatePoints = points => {
@@ -48,7 +52,20 @@ export class Settings {
     this.notSameNumber = rules.notSameNumber;
   };
 
-  get points() {
+  // Todo: Clean this up
+  randomize = () => {
+    const big = random(this.bigHole, this.currentPoints[0], this.rules);
+    const small = random(this.smallHole, this.currentPoints[1], this.rules);
+    const miss = random(this.miss, this.currentPoints[2], this.rules);
+
+    this.currentPoints = [big, small, miss];
+  };
+
+  get currentit() {
+    return this.currentPoints;
+  }
+
+  get pointRanges() {
     return {
       big: this.bigHole,
       small: this.smallHole,
@@ -65,13 +82,15 @@ export class Settings {
 }
 
 decorate(Settings, {
+  currentPoints: observable,
   bigHole: observable,
   smallHole: observable,
   miss: observable,
-  points: computed,
+  currentit: computed,
+  pointRanges: computed,
   rules: computed,
   updatePoint: action,
   updatePoints: action,
   updateRules: action,
-  componentDidMount: action.bound
+  randomize: action
 });
