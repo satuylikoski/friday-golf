@@ -31,7 +31,7 @@ export default function Settings() {
   };
 
   const reset = () => {
-    setPoints(store.points);
+    setPoints(store.pointRanges);
     setRules(store.rules);
   };
 

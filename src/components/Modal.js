@@ -54,7 +54,7 @@ const AnimatedBox = styled(animated(Box))`
   color: white;
 
   @media only screen and (min-width: 600px) {
-    height: 80%;
+    height: auto;
     width: 500px;
   }
 `;
