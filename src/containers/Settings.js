@@ -54,6 +54,15 @@ export default function Settings() {
           <Box position="absolute" top="4px" right="10px">
             <IconButton onClick={() => setIsOpen(true)}>
               <Icon className={classes.settings}>settings</Icon>
+              <Box
+                display={['none', 'none', 'inline']}
+                color="white"
+                ml="6px"
+                fontFamily="Catamaran"
+                fontWeight="700"
+              >
+                Settings
+              </Box>
             </IconButton>
           </Box>
 

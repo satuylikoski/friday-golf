@@ -20,7 +20,16 @@ export default function Instructions() {
     <>
       <Box position="absolute" top="4px" left="10px">
         <IconButton onClick={() => setIsOpen(true)}>
-          <Icon className={classes.settings}>{'help'}</Icon>
+          <Icon className={classes.settings}>help</Icon>
+          <Box
+            display={['none', 'none', 'inline']}
+            color="white"
+            ml="6px"
+            fontFamily="Catamaran"
+            fontWeight="700"
+          >
+            Info
+          </Box>
         </IconButton>
       </Box>
 
