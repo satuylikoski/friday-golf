@@ -1,9 +1,6 @@
-interface Rules {
-  avoidNull: boolean;
-  notSameNumber: boolean;
-}
+import { SettingsStore, Rules } from '../stores/Settings';
 
-export default function random([min, max]: number[], current: number, rules: Rules): number {
+function random([min, max]: number[], current: number, rules: Rules): number {
   let newValue;
 
   if (min === max) {
@@ -19,4 +16,16 @@ export default function random([min, max]: number[], current: number, rules: Rul
   }
 
   return newValue;
+}
+
+export function randomBig(store: SettingsStore) {
+  return random(store.bigHoleRange, store.randomizedPoints[0], store.rules);
+}
+
+export function randomSmall(store: SettingsStore) {
+  return random(store.smallHoleRange, store.randomizedPoints[1], store.rules);
+}
+
+export function randomMiss(store: SettingsStore) {
+  return random(store.missRange, store.randomizedPoints[2], store.rules);
 }

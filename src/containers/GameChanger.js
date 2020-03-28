@@ -12,7 +12,7 @@ import useStore from '../hooks/store';
 
 export default function GameChanger({ changers }) {
   const classes = useStyles();
-  const store = useStore('gameChanger');
+  const changer = useStore('gameChanger');
 
   if (isEmpty(changers)) {
     return null;
@@ -22,24 +22,24 @@ export default function GameChanger({ changers }) {
     <>
       <Observer>
         {() => (
-          <AnimatedBox color="white" position="relative" opened={store.isChangerOpen ? 1 : 0}>
+          <AnimatedBox color="white" position="relative" opened={changer.isOpen ? 1 : 0}>
             <Box px={[2, 4, 2]} pt={[2, 4, 4]} pb={[2, 4, 2]}>
               <Box position="absolute" top="6px" right="6px">
-                <IconButton onClick={store.closeChanger}>
+                <IconButton onClick={changer.close}>
                   <CloseIcon fontSize="small" style={{ color: '#ffffff' }} />
                 </IconButton>
               </Box>
 
               <Box>
                 <Icon className={classes.icon}>
-                  {changers[store.changerIndex].icon
-                    ? changers[store.changerIndex].icon
+                  {changers[changer.selectedIndex].icon
+                    ? changers[changer.selectedIndex].icon
                     : 'favorite'}
                 </Icon>
 
-                <RulesHeader>{changers[store.changerIndex].name}</RulesHeader>
+                <RulesHeader>{changers[changer.selectedIndex].name}</RulesHeader>
 
-                <RulesText>{changers[store.changerIndex].description}</RulesText>
+                <RulesText>{changers[changer.selectedIndex].description}</RulesText>
               </Box>
             </Box>
           </AnimatedBox>

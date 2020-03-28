@@ -11,7 +11,7 @@ import Button from '../components/Button';
 export default function Randomizer() {
   const [isOpen, setIsOpen] = useState(true);
   const store = useStore('settings');
-  const points = useObserver(() => store.currentPoints);
+  const points = useObserver(() => store.randomizedPoints);
 
   const current = useSpring({
     from: { big: 0, small: 0, miss: 0 },
@@ -43,7 +43,7 @@ export default function Randomizer() {
                 <HoleName>big</HoleName>
                 <Point>{current.big.interpolate(b => b.toFixed(0))}</Point>
                 <Description>
-                  From {store.bigHole[0]} to {store.bigHole[1]}
+                  From {store.bigHoleRange[0]} to {store.bigHoleRange[1]}
                 </Description>
               </Box>
 
@@ -51,7 +51,7 @@ export default function Randomizer() {
                 <HoleName>small</HoleName>
                 <Point>{current.small.interpolate(s => s.toFixed(0))}</Point>
                 <Description>
-                  From {store.smallHole[0]} to {store.smallHole[1]}
+                  From {store.smallHoleRange[0]} to {store.smallHoleRange[1]}
                 </Description>
               </Box>
 
@@ -59,7 +59,7 @@ export default function Randomizer() {
                 <HoleName>miss</HoleName>
                 <Point>{current.miss.interpolate(miss => miss.toFixed(0))}</Point>
                 <Description>
-                  From {store.miss[0]} to {store.miss[1]}
+                  From {store.missRange[0]} to {store.missRange[1]}
                 </Description>
               </Box>
             </>

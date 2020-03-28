@@ -47,6 +47,8 @@ export default function Settings() {
     }
   };
 
+  // TODO v2.0. Possibility to name ranges instead of big/small/miss
+  // TODO v2.0. Possibility to select amount of randomizers
   return (
     <Observer>
       {() => (

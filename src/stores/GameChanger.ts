@@ -1,18 +1,23 @@
 import { action, observable, decorate } from 'mobx';
 import store from 'store';
 
-export class GameChanger {
-  changerIndex = 0;
-  isChangerOpen = false;
+export interface GameChangerStore {
+  selectedIndex: number;
+  isOpen: boolean;
+}
 
-  closeChanger = () => {
-    this.isChangerOpen = false;
+export class GameChanger {
+  selectedIndex = 0;
+  isOpen = false;
+
+  close = () => {
+    this.isOpen = false;
   };
 
-  randomizeChanger = changers => {
+  randomizeChanger = (changers: any) => {
     let newValue;
 
-    // Check already used changers from store
+    // Check already used ones from local store
     let usedValues = store.get('changers') || [];
 
     if (Object.keys(changers).length === usedValues.length) {
@@ -24,22 +29,19 @@ export class GameChanger {
     } while (usedValues.includes(newValue));
 
     usedValues.push(newValue);
-
-    // Save to local store to know which ones were already used
     store.set('changers', usedValues);
 
-    if (this.isChangerOpen === false) {
-      this.isChangerOpen = true;
+    if (this.isOpen === false) {
+      this.isOpen = true;
     }
 
-    this.changerIndex = newValue;
+    this.selectedIndex = newValue;
   };
 }
 
 decorate(GameChanger, {
-  changerIndex: observable,
-  isChangerOpen: observable,
-  randomizeChanger: action,
-  closeChanger: action,
-  changer: observable
+  isOpen: observable,
+  selectedIndex: observable,
+  close: action,
+  randomizeChanger: action
 });
