@@ -3,7 +3,6 @@ import isEmpty from 'lodash/isEmpty';
 import Box from '@material-ui/core/Box';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import fridayGolf from './assets/friday-golf.png';
 import useChangers from './hooks/changers';
 import useStore from './hooks/store';
 
@@ -18,12 +17,12 @@ function App() {
   const changers = useChangers();
   const store = useStore('gameChanger');
 
-  // Next: Add some animations if max or min reached e.g.
+  // TODO v2.0. Animation when max points reached
   return (
     <>
       <Global />
       <Box display="flex" justifyContent="center" as="header">
-        <Logo src={fridayGolf} alt="friday golf" />
+        <Heading>Friday Golf</Heading>
       </Box>
 
       <Settings />
@@ -43,15 +42,20 @@ function App() {
   );
 }
 
-const Logo = styled.img`
-  height: 40px;
+const Heading = styled.h1`
+  font-family: 'Monoton', cursive;
+  font-size: 20px;
+  color: #fcd13f;
+  margin: 0;
+
+  text-align: center;
 
   @media only screen and (min-width: 600px) {
-    height: 70px;
+    font-size: 30px;
   }
 
   @media only screen and (min-width: 1024px) {
-    height: 100px;
+    font-size: 50px;
   }
 `;
 
