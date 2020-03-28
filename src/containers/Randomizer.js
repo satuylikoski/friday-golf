@@ -9,7 +9,7 @@ import useStore from '../hooks/store';
 import Button from '../components/Button';
 
 export default function Randomizer() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const store = useStore('settings');
   const points = useObserver(() => store.randomizedPoints);
 
@@ -23,7 +23,6 @@ export default function Randomizer() {
       {() => (
         <Wrapper>
           <Box style={{ gridColumn: '1 / span 3' }} mt={[0, 2, 3]} mb={[0, 0, 3]}>
-            {/* TODO: Move me away */}
             <Button
               onClick={() => {
                 store.randomize();
