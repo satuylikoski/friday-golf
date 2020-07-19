@@ -9,7 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "clsx": "^1.0.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^1.5.2",
     "polished": "^3.4.2",
